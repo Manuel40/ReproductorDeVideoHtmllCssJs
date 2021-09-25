@@ -5,13 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visor de video</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <main id="video">
-        <div id="videomargen">
-                <video src=""></video>
-        </div>
-        <div class="controls"></div>
+    <!--player-->
+    <main id="player">
+        <video src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"  poster="img/posterplay.png"class="video">
+
+        </video>
+        <!--controls-->
+       <nav class="controls">
+        <button class="button play">
+            <i class="fas fa-play"></i>
+        </button>
+        <button>
+            <i class="fas fa-stop"></i>
+        </button>
+        <input type="range" class="progress">
+        <small class="timestamp">
+            00:00
+        </small>
+       </nav> 
     </main>
 </body>
 </html>
