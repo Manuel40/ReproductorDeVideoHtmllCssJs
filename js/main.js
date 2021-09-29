@@ -3,14 +3,21 @@ const video = document.querySelector(".video")
 const playButton= document.querySelector(".play")
 const playButtonIcon = playButton.querySelector("i")
 const stopButton = document.querySelector(".stop")
+const forwardButton= document.querySelector(".forward")
+const backwardButton=document.querySelector(".backward")
+const progressBar = document.querySelector(".progress")
 
 //Listen for evets
 playButton.addEventListener("click", playPauseVideo)
 video.addEventListener("click", playPauseVideo)
 stopButton.addEventListener("click",stopVideo)
+forwardButton.addEventListener("click",forwardVideo)
+progressBar.addEventListener("change",setVideoProgress)
+backwardButton.addEventListener("click",backwardVideo)
 
 
 //Functions
+
 //pausa y da play al video
 function playPauseVideo(){
    /* if(video.paused){
@@ -44,5 +51,42 @@ function stopVideo(){
     video.pause();
     changeButtonToggleIcon();
     video.currentTime = 0;
+    progressBar.value=0;
     
 }
+
+//mover el current time con la barra progress
+
+function setVideoProgress(){
+     video.currentTime= Number((progressBar.value * video.duration)/100)
+     console.log(video.currentTime)
+}
+
+//Setea el progres bar segun el currentTime del video
+function setProgresBar(){
+    progressBar.value=Math.floor(Number((video.currentTime / video.duration)*100))
+   
+}
+
+//click to forward 15 seconds
+function forwardVideo(){
+    video.currentTime=video.currentTime+15;
+    setProgresBar()
+    console.log(video.currentTime)
+    console.log(progressBar.value)
+}
+
+//click to backward 15 seconds
+
+function backwardVideo(){
+    if(video.currentTime>15){
+        video.currentTime=(video.currrentTime)-15;
+    setProgresBar();
+    console.log(video.currentTime)
+    console.log(progressBar.value)
+}
+else{
+    console.log("nos es posible regresar 15 seg")
+}
+    }
+    
