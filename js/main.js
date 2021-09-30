@@ -7,7 +7,7 @@ const forwardButton= document.querySelector(".forward")
 const backwardButton=document.querySelector(".backward")
 const progressBar = document.querySelector(".progress")
 
-//Listen for evets
+//Listen for events
 playButton.addEventListener("click", playPauseVideo)
 video.addEventListener("click", playPauseVideo)
 stopButton.addEventListener("click",stopVideo)
@@ -80,7 +80,8 @@ function forwardVideo(){
 
 function backwardVideo(){
     if(video.currentTime>15){
-        video.currentTime=(video.currrentTime)-15;
+        let currentime = video.currentTime
+        video.currentTime = currentime -15;
     setProgresBar();
     console.log(video.currentTime)
     console.log(progressBar.value)
