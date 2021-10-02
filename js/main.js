@@ -6,6 +6,7 @@ const stopButton = document.querySelector(".stop")
 const forwardButton= document.querySelector(".forward")
 const backwardButton=document.querySelector(".backward")
 const progressBar = document.querySelector(".progress")
+const timeStamp= document.querySelector(".timestamp")
 
 //Listen for events
 playButton.addEventListener("click", playPauseVideo)
@@ -14,10 +15,11 @@ stopButton.addEventListener("click",stopVideo)
 forwardButton.addEventListener("click",forwardVideo)
 progressBar.addEventListener("change",setVideoProgress)
 backwardButton.addEventListener("click",backwardVideo)
+video.addEventListener("timeupdate",updateVideoProgress)
 
 
 //Functions
-
+setIconRepeatAgain()
 //pausa y da play al video
 function playPauseVideo(){
    /* if(video.paused){
@@ -29,7 +31,6 @@ function playPauseVideo(){
     
     video[video.paused ? "play" : "pause"]()
     changeButtonToggleIcon();
-    
     
 }
 //cambia el icono del boton de video
@@ -59,7 +60,23 @@ function stopVideo(){
 
 function setVideoProgress(){
      video.currentTime= Number((progressBar.value * video.duration)/100)
-     console.log(video.currentTime)
+      
+
+}
+//update time stamp de duracion del video
+function updateVideoProgress(){
+    setProgresBar()
+    let minutes=Math.floor(video.currentTime / 60)
+    let seconds=Math.floor(video.currentTime % 60)
+    if(minutes<10){
+        minutes = "0" + minutes
+        
+    }
+    if(seconds<10){
+       seconds= "0" + seconds
+   }
+   timeStamp.textContent = `${minutes}:${seconds}`
+   setIconRepeatAgain()
 }
 
 //Setea el progres bar segun el currentTime del video
@@ -72,8 +89,6 @@ function setProgresBar(){
 function forwardVideo(){
     video.currentTime=video.currentTime+15;
     setProgresBar()
-    console.log(video.currentTime)
-    console.log(progressBar.value)
 }
 
 //click to backward 15 seconds
@@ -83,11 +98,17 @@ function backwardVideo(){
         let currentime = video.currentTime
         video.currentTime = currentime -15;
     setProgresBar();
-    console.log(video.currentTime)
-    console.log(progressBar.value)
 }
 else{
     console.log("nos es posible regresar 15 seg")
 }
     }
     
+function setIconRepeatAgain(){
+if( video.currentTime==video.duration)
+{
+    playButtonIcon.classList.remove("fa-pause")
+    playButtonIcon.classList.add(" fa-solid fa-repeat")
+    console.log("cambiando icono repeat")
+}
+}
